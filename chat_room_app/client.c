@@ -14,7 +14,7 @@ int create_client()
 { unsigned short int port_number = 3201;
   struct hostent * current_working_host = gethostbyname("rabbit.eng.miami.edu");
   if (!current_working_host)
-  { herror("get current host failed; try to ping rabbit.eng.miami.edu");
+  { herror("get current host failed; try pinging rabbit.eng.miami.edu");
     exit(1); }
   struct in_addr * address = (struct in_addr *)current_working_host->h_addr;
   //printf("Host IP address: %s\n", inet_ntoa(*address));
@@ -39,8 +39,8 @@ int read_user_message_from_keyboard(char * buffer)
   for (i = 0; 1; i += 1)
   { buffer[i] = getchar();
     if (buffer[i] == '\n' || i == max_message_length-2)
-    { buffer[i+1] = '\0';
-      break; } }
+      break; }
+  buffer[i+1] = '\0';
   if (i == 0)
     return 0;
   return 1; }
