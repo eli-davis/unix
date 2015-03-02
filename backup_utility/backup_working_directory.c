@@ -7,7 +7,6 @@
 #include <unistd.h>
 #include "mybackup.h"
 
-
 bool is_a_file(char * name)
 { struct stat S;
   int r;
@@ -33,7 +32,6 @@ bool has_been_modified(char * name, int most_recent_backup_time)
   if (time_last_modified > most_recent_backup_time)
     return 1;
   return 0; }
-
 
 int get_time_created(struct dirent * directory_entry)
 { struct stat S;
@@ -66,7 +64,6 @@ int get_time_most_recent_backup(DIR * current_directory)
     directory_entry = readdir(current_directory); }
   //printf("\n\nmost recent backup time %d\n", most_recent_backup_time);
   return most_recent_backup_time; }
-
 
 char * get_current_time()
 { time_t current_time = time(NULL);
@@ -108,7 +105,6 @@ char * create_backup_file_path(char * backup_directory_name, char * file_name)
   strncat(backup_file_path, file_name, 31);
   return backup_file_path; }
 
-
 DIR * open_current_working_directory()
 { char s[80];
   char * current_working_directory_name = getcwd(s, 80);
@@ -118,7 +114,6 @@ DIR * open_current_working_directory()
            "if so 'cd ..' and reenter current working directory.\n");
   DIR * current_working_directory = opendir(current_working_directory_name);
   return current_working_directory; }
-
 
 void copy_file_to_backup_directory(char * backup_file_path, char * file_name)
 { int i, r, w;
@@ -174,7 +169,6 @@ void print_directory_entry(struct dirent * directory_entry)
   printf("name length %hhd\n", directory_entry->d_namlen);
   printf("name        %s\n", directory_entry->d_name); }
 
-
 int main(int argc, char * argv[])
 { DIR * current_working_directory = open_current_working_directory();
   int most_recent_backup_time = get_time_most_recent_backup(current_working_directory);
@@ -183,5 +177,3 @@ int main(int argc, char * argv[])
     backup_modified_files(most_recent_backup_time, argv);
   else
     backup_directory(most_recent_backup_time); }
-
-
