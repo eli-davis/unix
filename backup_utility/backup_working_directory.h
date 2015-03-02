@@ -1,6 +1,5 @@
 #include<dirent.h>
 
-
 typedef unsigned char byte;
 typedef int bool;
 
@@ -25,4 +24,3 @@ void copy_file_to_backup_directory(char * backup_file_path, char * file_name);
 void backup_modified_files(int most_recent_backup_time, char * argv[]);
 void backup_directory();
 void print_directory_entry(struct dirent * directory_entry);
-
