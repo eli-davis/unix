@@ -61,7 +61,7 @@ void display_incoming_messages(int client_socket)
   fclose(f_write);
   exit(0); } }
 
-void join_group_chat_room()
+void join_chat_room()
 { int n, client_socket = create_client();
   display_incoming_messages(client_socket);
   FILE * f_write = fdopen(client_socket, "w");
@@ -73,4 +73,4 @@ void join_group_chat_room()
     fflush(f_write); } }
 
 int main()
-{ join_group_chat_room(); }
+{ join_chat_room(); }
