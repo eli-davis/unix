@@ -14,13 +14,13 @@
 const int max_users = 100;
 
 // user socket and initials
-struct client_data
+typedef struct _client_data
 { char initial_one;
   char initial_two;
-  int room_socket; };
+  int room_socket; } client_data;
 
 // for debugging
-void print_clients(struct client_data * * client_list);
+void print_clients(client_data * * client_list);
 
 int create_server()
 { unsigned int port_number = 3201;
@@ -65,7 +65,7 @@ int accept_client_connection(int server_socket)
   printf("\nserver connected to client: %s; room socket: %d\n", client_address, room_socket);
   return room_socket; }
 
-void print_online_users(int room_socket, struct client_data * * client_list)
+void print_online_users(int room_socket, client_data * * client_list)
 { int i, index, end_of_message_index, number_of_users = 0;
   char message[max_users * 4];
   for (i = 0; i < max_users; i += 1)
@@ -90,7 +90,7 @@ void print_online_users(int room_socket, struct client_data * * client_list)
     fprintf(f, "there are %d other people online:\n%s\n", number_of_users, message);
   fflush(f); }
 
-void get_user_initials(int room_socket, int room_number, struct client_data * * client_list)
+void get_user_initials(int room_socket, int room_number, client_data * * client_list)
 { char buffer[32];
   FILE * f_write = fdopen(room_socket, "w");
   fprintf(f_write, "Enter your two initials to chat\n");
@@ -108,7 +108,7 @@ void get_user_initials(int room_socket, int room_number, struct client_data * * 
     { fprintf(f_write, "Invalid entry. Please enter two initals \"JD\"\n");
       fflush(f_write); } } }
 
-int send_outgoing_message(int room_socket, int room_number, struct client_data * * client_list)
+int send_outgoing_message(int room_socket, int room_number, client_data * * client_list)
 { //print_clients(client_list);
   int i, r, current_socket;
   char buffer[512];
@@ -129,7 +129,7 @@ int send_outgoing_message(int room_socket, int room_number, struct client_data *
         fflush(f_write); } }
     return 1; } }
 
-void print_user_logout(int room_socket, int room_number, struct client_data * * client_list)
+void print_user_logout(int room_socket, int room_number, client_data * * client_list)
 { int i, current_socket;
   FILE * f_write, * f = fdopen(room_socket, "w");
   char message[32];
@@ -144,7 +144,7 @@ void print_user_logout(int room_socket, int room_number, struct client_data * * 
       fprintf(f_write, "%s\n", message);
       fflush(f_write); } } }
 
-void manage_clients(int server_socket, struct client_data * * client_list)
+void manage_clients(int server_socket, client_data * * client_list)
 { int i, room_number = 0;
   struct pollfd open_room[max_users + 1];
   // creates poll field for each client
@@ -187,7 +187,7 @@ void manage_clients(int server_socket, struct client_data * * client_list)
 }
 
 // debugging
-void print_clients(struct client_data * * client_list)
+void print_clients(client_data * * client_list)
 { int i;
   for (i = 0; i < max_users; i += 1)
   { printf("%c%c:", client_list[i]->initial_one, client_list[i]->initial_two);
@@ -197,9 +197,9 @@ void print_clients(struct client_data * * client_list)
 int main()
 { int i;
   int server_socket = create_server();
-  struct client_data * * client_list = malloc(max_users * sizeof(*client_list));
+  client_data * * client_list = malloc(max_users * sizeof(*client_list));
   for (i = 0; i < max_users; i += 1)
-    client_list[i] = malloc(sizeof(struct client_data));
+    client_list[i] = malloc(sizeof(client_data));
   for (i = 0; i < max_users; i += 1)
   { client_list[i]->initial_one = '0';
     client_list[i]->initial_two = '0';
