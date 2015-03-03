@@ -1,5 +1,3 @@
-#include<dirent.h>
-
 typedef unsigned char byte;
 typedef int bool;
 
