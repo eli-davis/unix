@@ -5,7 +5,8 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include "mybackup.h"
+#include <dirent.h>
+#include "backup_working_directory.h"
 
 bool is_a_file(char * name)
 { struct stat S;
