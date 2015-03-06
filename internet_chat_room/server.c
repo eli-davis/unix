@@ -19,7 +19,6 @@ typedef struct _client_data
   char initial_two;
   int room_socket; } client_data;
 
-// for debugging
 void print_clients(client_data * * client_list);
 
 int create_server()
@@ -147,12 +146,12 @@ void print_user_logout(int room_socket, int room_number, client_data * * client_
 void manage_clients(int server_socket, client_data * * client_list)
 { int i, room_number = 0;
   struct pollfd open_room[max_users + 1];
-  // creates poll field for each client
+  // create poll field for each client
   for (i = 0; i < max_users; i += 1)
   { open_room[i].fd = 0;
     open_room[i].events = 0;
     open_room[i].revents = 0; }
-  //creates poll field for server
+  //create poll field for server
   open_room[max_users].fd = server_socket;
   open_room[max_users].events = POLLRDNORM;
   open_room[max_users].revents = 0;
