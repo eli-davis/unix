@@ -30,7 +30,6 @@ void run_program(char * * s, int n_args)
     exit(1); }
   pid2 = wait(& status); }
 
-
 void simple_shell()
 { int n_args, i;
   //memory space for user command is always the same, freed on quit
