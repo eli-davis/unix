@@ -2,4 +2,4 @@
 
 some c projects. 
 
-I go back and forth between two spaces and four spaces for indentation, and curly braces on their own lines sometimes, and sometimes not. 
+I think four spaces, and curly braces on their own line is more readable, but these were written with two spaces, and curly braces didn't get their own lines. i'm working on the parser that uses the analyzer and symbol table in the interpreter directory. I'll post that in a couple weeks
