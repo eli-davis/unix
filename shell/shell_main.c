@@ -8,8 +8,7 @@ void print_commands()
   printf("  help \n");
   printf("  echo \n");
   printf("  q/quit/exit/logout \n");
-  printf("  run executable_name arg1 arg2 arg3 \n\n");
-}
+  printf("  run executable_name arg1 arg2 arg3 \n\n"); }
 
 int quit_command(char * argument)
 { int quit = 0;
@@ -30,8 +29,7 @@ void run_program(char * * s, int n_args)
   { int r = execvp(args[0], args);
     printf("program not found. ");
     exit(1); }
-  pid2 = wait(& status);
-}
+  pid2 = wait(& status); }
 
 
 void simple_shell()
@@ -57,36 +55,15 @@ void simple_shell()
         free(sarray[i]);
       free(sarray);
       break; }
-
     else if (!strcmp(sarray[0], "help"))
       print_commands();
-
     else if (!strcmp(sarray[0], "echo"))
     { for (i = 1; i < n_args && sarray[i] != NULL; i += 1)
         printf("%s ", sarray[i]); }
-
     else if (!strcmp(sarray[0], "run"))
       run_program(sarray, n_args);
-
-/*
-      char * args[max_arg_c];
-      for (i = 0; i < n; i += 1)
-        args[i] = strdup(sarray[i+1]);
-      args[i-1] = NULL;
-
-      pid = fork();
-      if (pid == 0)
-      { int r = execvp(args[0], args);
-        printf("program not found. ");
-        exit(1); }
-      pid2 = wait(& status);
-*/
-
     else
-      printf("command not found. ");
-
-   }
-}
+      printf("command not found. "); } }
 
 
 int main()
