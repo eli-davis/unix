@@ -57,8 +57,7 @@ char * process_string(char * input)
     static_string = local_string + 1; }
 
  return result;  }
-
-
+ 
 
 int get_command_line(char * * array_of_strings)
 { int i, arg_c;
