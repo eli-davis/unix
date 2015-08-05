@@ -23,7 +23,6 @@ void run_program(char * * s, int n_args)
   for (i = 0; i < n_args; i += 1)
     args[i] = strdup(s[i+1]);
   args[i-1] = NULL;
-
   pid = fork();
   if (pid == 0)
   { int r = execvp(args[0], args);
@@ -34,21 +33,16 @@ void run_program(char * * s, int n_args)
 
 void simple_shell()
 { int n_args, i;
-
   //memory space for user command is always the same, freed on quit
   char * * sarray = malloc(max_arg_c * sizeof(*sarray));
   for (i = 0; i < max_arg_c; i += 1)
     sarray[i] = malloc(max_arg_length + 1);
-
   print_commands();
-
   while (1)
   { printf("\n---> ");
     for (i = 0; i < max_arg_c; i += 1)
       *sarray[i] = (char *)NULL;
-
     n_args = get_command_line(sarray);
-
     if (quit_command(sarray[0]))
     { printf("exiting shell \n");
       for (i = 0; i < max_arg_c; i += 1)
@@ -64,7 +58,6 @@ void simple_shell()
       run_program(sarray, n_args);
     else
       printf("command not found. "); } }
-
 
 int main()
 { simple_shell(); }
