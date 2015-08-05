@@ -1,3 +1,3 @@
-a simple shell which reads and executes user commands
+a simple shell which reads and executes user commands.
 
-(note: upload shell_command_line.c)
+also runs user programs using fork and exec
